@@ -1,17 +1,44 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app" class="container-fluid">
+    <div class="d-flex" >
+      <div class="col">
+        <js-clock />
+      </div>
+      <div class="col-5" >
+        <JsBus 
+          :size="8" 
+          :bus="data_bus"
+          title="Data Bus" />
+      </div>
+      <div class="col">
+        <js-register
+          :clock="clock"
+          :control_bus="control_bus"
+          :data_bus="data_bus"
+          :register="register"
+          :re_bit="register_read_bit"
+          :we_bit="register_write_bit" />
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import JsClock from "./components/JsClock.vue"
+import JsRegister from "./components/JsRegister.vue";
+import JsBus from "./components/JsBus.vue";
+
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    JsClock,
+    JsRegister,
+    JsBus
+  },
+  data: function() {
+    return {
+    };
   }
 }
 </script>
