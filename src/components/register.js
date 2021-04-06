@@ -121,4 +121,20 @@ VirtualRegister.prototype.set = function(bit_idx, value = -1)
       this.register |= (bit_val << bit_idx);
    else
       this.register &= ~(1 << bit_idx);
+   this.clients.forEach((client) => {
+      client(this, bit_idx, bit_val);
+   });
 };
+
+/**
+ * Sets the entire register using the specified numeric and notifies all clients.
+ * 
+ * @param {number} value Specifies the new values for all bits.
+ */
+VirtualRegister.prototype.set_register = function(value) 
+{
+   this.register = value;
+   this.clients.forEach((client) => {
+      client(this, -1, -1);
+   });
+}

@@ -1,4 +1,7 @@
-/* eslint-disable no-undef */
+import { VirtualRegister } from "./register.js";
+import { VirtualFullAdder, VirtualXOR } from "./logicgates.js";
+
+
 /**
  * Defines a module that implements a virtual ALU for the simulated computer.  This
  * ALU is constructed to read two input registers as well as a control register.
@@ -71,7 +74,7 @@ export function VirtualALU({
    clock.add_rising_client(() => {
       const do_subtract = control_bus.get(op_index);
       let last_add = { sum: 0, cout: 0 };
-      this.output.register = 0;
+      let output_register = 0;
       for(let i = 0; i < bus_size; ++i)
       {
          // we can use the XOR operation to convert the b register to twos complement and feed in the result
@@ -79,9 +82,10 @@ export function VirtualALU({
          const ai = this.a.get(i);
          const bi = this.b.get(i);
          last_add = VirtualFullAdder(last_add.cout, ai, VirtualXOR(bi, do_subtract));
-         this.output.register |= (last_add.sum << i);
+         output_register |= (last_add.sum << i);
 
          // @todo: we need to update the flags register with the zero and carry values 
       }
+      this.output.set_register(output_register);
    }); 
 }

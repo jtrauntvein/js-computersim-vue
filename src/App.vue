@@ -17,6 +17,10 @@
       </div>
     </b-row>
     <b-row class="d-flex" >
+      <div class="col-4" />
+      <div class="col" >
+        <js-alu />
+      </div>
     </b-row>
   </div>
 </template>
@@ -25,6 +29,7 @@
 import JsClock from "./components/JsClock.vue"
 import JsRegister from "./components/JsRegister.vue";
 import JsBus from "./components/JsBus.vue";
+import JsAlu from "./components/JsAlu.vue";
 
 
 export default {
@@ -32,7 +37,8 @@ export default {
   components: {
     JsClock,
     JsRegister,
-    JsBus
+    JsBus,
+    JsAlu
   },
   data: function() {
     return {

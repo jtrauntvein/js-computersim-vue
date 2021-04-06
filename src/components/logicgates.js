@@ -10,7 +10,7 @@
  * 
  * @return {number} Returns the result of the binary operation.
  */
-function VirtualAND(a, b)
+export function VirtualAND(a, b)
 {
    let rtn = 0;
    for(let i = 0; i < VirtualAND.truth_table.length; ++i)
@@ -41,7 +41,7 @@ VirtualAND.truth_table = [
  * 
  * @return {number} Returns the result of the operation.
  */
-function VirtualNAND(a, b)
+export function VirtualNAND(a, b)
 {
    let rtn = 0;
    for(let i = 0; i < VirtualNAND.truth_table.length; ++i)
@@ -73,7 +73,7 @@ VirtualNAND.truth_table = [
  * 
  * @return {number} Returns the result of the OR operation.
  */
-function VirtualOR(a, b)
+export function VirtualOR(a, b)
 {
    let rtn = 0;
    for(let i = 0; i < VirtualOR.truth_table.length; ++i)
@@ -104,7 +104,7 @@ VirtualOR.truth_table = [
  * 
  * @return {number} Returns the result of the NOR operator.
  */
-function VirtualNOR(a, b)
+export function VirtualNOR(a, b)
 {
    let rtn = 0;
    for(let i = 0; i < VirtualNOR.truth_table.length; ++i)
@@ -133,7 +133,7 @@ VirtualNOR.truth_table = [
  * 
  * @param {number} b Specifies the second input
  */
-function VirtualXOR(a, b)
+export function VirtualXOR(a, b)
 {
    let rtn = 0;
    for(let i = 0; i < VirtualXOR.truth_table.length; ++i)
@@ -164,7 +164,7 @@ VirtualXOR.truth_table = [
  * 
  * @param {number} cin Specifies the carry input.
  */
-function VirtualFullAdder(cin, a, b)
+export function VirtualFullAdder(cin, a, b)
 {
    let rtn = {
       sum: 0, cout: 0
