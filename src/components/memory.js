@@ -1,4 +1,6 @@
-/* eslint-disable no-undef */
+import { VirtualRegister } from "./register.js";
+
+
 /**
  * Defines an object that represents memory storage for the virtual CPU.
  * 
@@ -22,7 +24,7 @@
  * @param {number=2} options.mr_index Specifies the index of the control bus line that enables the memory to read the value on the 
  * data bus into the currently addressed cell.
  */
-function VirtualMemory({
+export function VirtualMemory({
    clock = null,
    data_bus = null,
    control_bus = null,
@@ -63,15 +65,20 @@ function VirtualMemory({
    for(let i = 0; i < width; ++i)
       this.bus_mask |= (1 << i);
    this.storage = new this.storage_type(size);
+   this.clients = [];
    clock.add_rising_client(() => {
       const address = this.address_register.register;
-      if(control_bus.get(mr_index))
-         this.data_bus.register = this.storage[address] & this.bus_mask;
       if(control_bus.get(mw_index))
+         this.data_bus.set_register(this.storage[address] & this.bus_mask);
+      if(control_bus.get(mr_index))
+      {
          this.storage[address] = this.data_bus.register & this.bus_mask;
+         this.clients.forEach((client) => {
+            client(this, address, this.storage[address]);
+         });
+      }
    });
 }
-
 
 /**
  * @return Returns the bit value of the currently addressed cell for the specified bit index.
@@ -83,3 +90,12 @@ VirtualMemory.prototype.get = function(bit_idx)
    const cell = this.storage[this.address_register.register];
    return (cell & (1 << bit_idx)) >> bit_idx;
 };
+
+/**
+ * Adds client object to listen for changes to memory
+ * 
+ * @param {function} client Specifies a callback function that will receive this object, the current address, and the current
+ * address value.
+ */
+VirtualMemory.prototype.add_client = function(client)
+{ this.clients.push(client); };

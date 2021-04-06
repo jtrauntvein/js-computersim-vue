@@ -17,7 +17,9 @@
       </div>
     </b-row>
     <b-row class="d-flex" >
-      <div class="col-4" />
+      <div class="col" >
+        <js-memory />
+      </div>
       <div class="col" >
         <js-alu />
       </div>
@@ -30,6 +32,7 @@ import JsClock from "./components/JsClock.vue"
 import JsRegister from "./components/JsRegister.vue";
 import JsBus from "./components/JsBus.vue";
 import JsAlu from "./components/JsAlu.vue";
+import JsMemory from "./components/JsMemory.vue";
 
 
 export default {
@@ -38,7 +41,8 @@ export default {
     JsClock,
     JsRegister,
     JsBus,
-    JsAlu
+    JsAlu,
+    JsMemory
   },
   data: function() {
     return {
