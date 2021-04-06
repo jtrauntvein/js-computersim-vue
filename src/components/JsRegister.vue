@@ -41,12 +41,12 @@ export default {
    },
    props: {
       title: String,
-      re_bit: Number,
-      we_bit: Number,
       register: Object
    },
    data: function() {
       return {
+         re_bit: this.register.read_enable_idx,
+         we_bit: this.register.write_enable_idx
       }
    },
    methods: {

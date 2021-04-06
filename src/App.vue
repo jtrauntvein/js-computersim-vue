@@ -13,9 +13,7 @@
       <div class="col">
         <js-register
           title="Register 0"
-          :register="register0"
-          :re_bit="register_read_bit"
-          :we_bit="register_write_bit" />
+          :register="register0" />
       </div>
     </b-row>
     <b-row class="d-flex" >
