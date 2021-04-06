@@ -13,6 +13,7 @@
       </b-card-body>
       <b-card-footer>
          <b-button 
+            v-if="re_bit >= 0"
             v-on:click="toggle_re" 
             variant="primary"
             size="sm" >
@@ -20,6 +21,7 @@
             Read Enabled
          </b-button>
          <b-button 
+            v-if="we_bit >= 0"
             v-on:click="toggle_we" 
             class="ml-2" 
             variant="primary"
