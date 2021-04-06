@@ -23,7 +23,7 @@
  * @param {number=4} config.op_index Specifies the control line that will control whether addition (0) will
  * be performed or subtraction(1).
  */
-function VirtualALU({
+export function VirtualALU({
    clock,
    data_bus,
    control_bus,

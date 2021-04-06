@@ -1,6 +1,6 @@
 <template>
   <div id="app" class="container-fluid">
-    <div class="d-flex" >
+    <b-row class="d-flex" >
       <div class="col">
         <js-clock />
       </div>
@@ -12,14 +12,14 @@
       </div>
       <div class="col">
         <js-register
-          :clock="clock"
-          :control_bus="control_bus"
-          :data_bus="data_bus"
-          :register="register"
+          title="Register 0"
+          :register="register0"
           :re_bit="register_read_bit"
           :we_bit="register_write_bit" />
       </div>
-    </div>
+    </b-row>
+    <b-row class="d-flex" >
+    </b-row>
   </div>
 </template>
 

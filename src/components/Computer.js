@@ -23,7 +23,7 @@ export default {
          clock: the_clock,
          data_bus: the_bus,
          control_bus: the_control_bus,
-         register: the_register,
+         register0: the_register,
          register_read_bit: register_read_bit,
          register_write_bit: register_write_bit
       }

@@ -1,7 +1,7 @@
 <template>
    <b-card>
       <b-card-header >
-         <b-card-title>Register</b-card-title>
+         <b-card-title>{{title}}</b-card-title>
       </b-card-header>
       <b-card-body>
          <div class="d-flex flex-row m-2" >
@@ -40,14 +40,13 @@ export default {
       Led
    },
    props: {
+      title: String,
       re_bit: Number,
-      we_bit: Number
+      we_bit: Number,
+      register: Object
    },
    data: function() {
       return {
-         write_enabled: false,
-         read_enabled: false,
-         register_bits: []
       }
    },
    methods: {
@@ -59,24 +58,29 @@ export default {
       }
    },
    computed: {
+      write_enabled: function() {
+         return this.control_bus.get(this.we_bit) ? true : false;
+      },
+      read_enabled: function() {
+         return this.control_bus.get(this.re_bit) ? true : false;
+      },
+      register_bits: function() {
+         const rtn = [];
+         for(let i = 0; i < this.register.size; ++i)
+            rtn[i] = this.register.get(i) ? true : false;
+         return rtn;
+      },
       register_size: function() {
          return this.register.size;
       }
    },
    mounted: function () {
-      this.control_bus.add_client((bus) => {
-         this.write_enabled = bus.get(this.we_bit) ? true : false;
-         this.read_enabled = bus.get(this.re_bit) ? true : false;
-      });
-      for(let i = 0; i < this.register.size; ++i)
-         this.register_bits[i] = this.register.get() ? true : false;
-      this.register.add_client((register) => {
-         for(let i = 0; i < register.size; ++i)
-            this.register_bits[i] = register.get(i) ? true : false;
+      this.control_bus.add_client(() => {
          this.$forceUpdate();
       });
-      for(let i = 0; i < this.register.size; ++i)
-         this.register_bits[i] = this.register.get(i) ? true : false;
+      this.register.add_client(() => {
+         this.$forceUpdate();
+      });
    }
 }
 </script>
